@@ -12,4 +12,4 @@ Para iniciar el proyecto con ambiente de desarrollo correr el siguiente comando
 	$ go run main.go
 
 Para compilar el proyecto correr el siguiente comando
-    $ go build main.go -o main
+    $ go build main.go -o tlv-api
