@@ -12,7 +12,7 @@ func main() {
 	router := gin.Default()
 	router.Use(CORSMiddleware())
 	router.POST("/getTlv", controllers.GetTlv)
-	port := os.Getenv("PORT")
+	port := os.Getenv("APIPORT")
 	if port == "" {
 		port = "5000"
 	}
