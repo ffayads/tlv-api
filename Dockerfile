@@ -7,5 +7,5 @@ WORKDIR $GOPATH/src/github.com/api/tlv-api/
 ENV GO111MODULE=auto
 COPY . .
 RUN go build -o tlv-api
-EXPOSE 80
+EXPOSE 5000
 CMD ["./tlv-api"]
