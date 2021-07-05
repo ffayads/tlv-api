@@ -1,5 +1,5 @@
 FROM golang
-LABEL maintainer="felixfayad@paymentez.com"
+LABEL maintainer="felixfayad@gmail.com"
 # Set up app
 # Set the Current Working Directory inside the container
 WORKDIR $GOPATH/src/github.com/api/tlv-api/
