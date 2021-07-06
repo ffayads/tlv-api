@@ -17,7 +17,7 @@ Golang es un proyecto compilado por lo cual se debe ejecutar la siguiente senten
 
 Para ejecutar el proyecto y crear el archivo compilado como ambiente de produccion se debe ejecutar la siguiente sentencia:
 
-	$ go build main.go -o stock-exchange
+	$ go build main.go -o tlv-api
 
 Al ingresar a [http://127.0.0.1:5000](http://127.0.0.1:5000) podra ver el proyecto corriendo, para cambiar el puerto puede agregar la variable de entorno APIPORT, ejemplo:
 
