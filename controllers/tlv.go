@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"bytes"
 	"net/http"
 	"strconv"
@@ -23,9 +22,12 @@ func GetTlv(c *gin.Context) {
 	var status bool = true
 	var err error
 	params := &httpmodels.TlvRequest{}
-	fmt.Println("llega: ",params)
 	if err = c.Bind(params); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Datos Incompletos", "data": gin.H{"err": err.Error()}})
+		return
+	}
+	if params == nil || params.Data == nil{
+		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Datos Incompletos", "data": gin.H{"err": ""}})
 		return
 	}
 	param := bytes.NewBuffer(params.Data).String()
