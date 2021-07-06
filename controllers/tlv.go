@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"bytes"
+	"encoding/json"
 	"net/http"
 	"strconv"
 
@@ -26,9 +27,17 @@ func GetTlv(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Datos Incompletos", "data": gin.H{"err": err.Error()}})
 		return
 	}
-	if params == nil || params.Data == nil{
-		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Datos Incompletos", "data": gin.H{"err": ""}})
-		return
+	if params == nil || params.Data == nil {
+		jsonData, errr := c.GetRawData()
+		if errr == nil {
+			if err := json.Unmarshal(jsonData, params); err != nil {
+				c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Datos Incompletos", "data": gin.H{"err": err.Error()}})
+				return
+			}
+		} else {
+			c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Datos Incompletos", "data": gin.H{"err": ""}})
+			return
+		}
 	}
 	param := bytes.NewBuffer(params.Data).String()
 	if len(param) <= utils.SizeLenght {
@@ -37,7 +46,7 @@ func GetTlv(c *gin.Context) {
 	}
 	err, response, status, count := helpers.GetTlv(param)
 	if status == false {
-		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Formato invalido en el lenght: " + strconv.Itoa(count), "data": gin.H{"err": err.Error()}})
+		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Formato invalido en el lenght: " + strconv.Itoa(count), "data": gin.H{"err": ""}})
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{

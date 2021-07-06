@@ -36,4 +36,8 @@ curl --location --request POST 'http://localhost:5000/getTlv' \
 }'
 ````
 
+## Unit test
 
+````
+go test --cover ./... 
+````
